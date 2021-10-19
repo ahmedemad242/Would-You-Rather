@@ -1,6 +1,6 @@
 import { RECIEVE_QUESTIONS, ANSWER_QUESTION, ADD_QUESTION } from "../actions/questions";
 
-export default function users(state = {}, action){
+export default function questions(state = {}, action){
     switch(action.type){
         case RECIEVE_QUESTIONS: 
             return {
