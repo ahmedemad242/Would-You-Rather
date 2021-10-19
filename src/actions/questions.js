@@ -16,6 +16,8 @@ export function addQuestion(question) {
     }
 }
 
+//todo: Add addQuestion handler to handle async request
+
 export function answerQuestion(id, authedUser) {
     return {
         type: ANSWER_QUESTION,
@@ -23,3 +25,5 @@ export function answerQuestion(id, authedUser) {
         authedUser
     }
 }
+
+//todo: Add answerQuestion handler to handle async request
