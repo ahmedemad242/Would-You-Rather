@@ -2,15 +2,12 @@
 
 ### `npm install`
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
-
-The page will reload if you make edits.\
-You will also see any lint errors in the console.
+Install all app dependancies.\
 
 ### `npm start`
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+Runs the app in the development mode.\
+Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
 
+This application allow you to play would you rather between you and your friends. There is a login feature which allows the choice of the player, a leaderboard which show the highest score user, a way to add new would you rather, and to let your friends answer them!
 
