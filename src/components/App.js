@@ -5,7 +5,8 @@ import { connect } from 'react-redux'
 import NewQuestion from './NewQuestion'
 import Container from 'react-bootstrap/Container'
 import ShowQuestion from  './ShowQuestion'
-
+import LeaderBoard from './LeaderBoard'
+  
 class App extends Component {
   componentDidMount() {
     this.props.dispatch(handleInitialData())
@@ -16,7 +17,7 @@ class App extends Component {
       <div className="container">
         {this.props.loading?null
         :<Container style={{width: "50%",}}>
-            <ShowQuestion id = '8xf0y6ziyjabvozdd253nd'/>
+            <LeaderBoard/>
           </Container>
         }
       </div>
