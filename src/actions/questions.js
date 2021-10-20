@@ -2,6 +2,7 @@ export const RECIEVE_QUESTIONS = 'RECIEVE_QUESTIONS'
 export const ADD_QUESTION = 'ADD_QUESTION'
 export const ANSWER_QUESTION = 'ANSWER_QUESTION'
 
+
 export function recieveQuestions(questions) {
     return {
         type: RECIEVE_QUESTIONS,
@@ -16,14 +17,12 @@ export function addQuestion(question) {
     }
 }
 
-//todo: Add addQuestion handler to handle async request
-
-export function answerQuestion(id, authedUser) {
+export function answerQuestion(question, authedUser, answer) {
     return {
         type: ANSWER_QUESTION,
-        id,
-        authedUser
+        question,
+        authedUser,
+        answer,
     }
 }
 
-//todo: Add answerQuestion handler to handle async request

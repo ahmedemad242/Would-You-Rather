@@ -6,6 +6,8 @@ import NewQuestion from './NewQuestion'
 import Container from 'react-bootstrap/Container'
 import ShowQuestion from  './ShowQuestion'
 import LeaderBoard from './LeaderBoard'
+import AnsweredQuestion from "./AnsweredQuestion";
+import UnansweredQuestion from "./UnansweredQuestion";
 
 class App extends Component {
   componentDidMount() {
@@ -17,7 +19,7 @@ class App extends Component {
       <div className="container">
         {this.props.loading?null
         :<Container style={{width: "50%",}}>
-            <Home/>
+            <UnansweredQuestion id = "8xf0y6ziyjabvozdd253nd"/>
           </Container>
         }
       </div>

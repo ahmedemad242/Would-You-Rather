@@ -4,6 +4,9 @@ import Card from 'react-bootstrap/Card'
 import Button from 'react-bootstrap/Button'
 import Container from 'react-bootstrap/Container'
 import Form from 'react-bootstrap/Form'
+import { handleAddQuestion } from '../actions/shared'
+
+
 
 class NewQuestion extends Component{
     state={
@@ -16,11 +19,18 @@ class NewQuestion extends Component{
             firstQuestion: firstQuestion===null?state.firstQuestion:firstQuestion,
             secondQuestion: secondQuestion===null?state.secondQuestion:secondQuestion
         }))
-        
+    }
+
+    handleSubmit = (e) => {
+        e.preventDefault()
+        this.props.dispatch(handleAddQuestion(this.state.firstQuestion,this.state.secondQuestion))
+        this.setState(()=>({
+            firstQuestion:'',
+            secondQuestion: '',
+        }))
     }
 
     render() {
-        const { authedUser, author, question, id } = this.props 
         return (
             <Container>
                 <Card>
@@ -31,7 +41,7 @@ class NewQuestion extends Component{
                         Would you rather...
                         </Card.Text>
                         <Form>
-                            <Form.Group className="mb-3" controlId="formFirstQuestion">
+                            <Form.Group className="mb-3" controlId="formFirstQuestion" >
                                 <Form.Control 
                                 value={this.state.firstQuestion} 
                                 type="text" 
@@ -47,7 +57,12 @@ class NewQuestion extends Component{
                                 placeholder="Enter Second  Question"
                                 onChange={(e)=>this.onChangeText(null,e.target.value)} />
                             </Form.Group>
-                            <Button variant="outline-primary">Submit</Button>
+                            <Button 
+                            variant="outline-primary" 
+                            type="submit"
+                            disabled={this.state.firstQuestion===''|| this.state.secondQuestion===''}
+                            onClick={(e)=>this.handleSubmit(e)}
+                            >Submit</Button>
                         </Form>
 
                         
@@ -58,15 +73,5 @@ class NewQuestion extends Component{
     }
 }
 
-function mapStateToProps({ authedUser, users, questions }, { id }){
-    const question = questions[id]
-    const author = question ? users[question.author] : null
 
-    return {
-        authedUser,
-        author,
-        question: question 
-    }
-}
-
-export default connect(mapStateToProps)(NewQuestion)
+export default connect()(NewQuestion)

@@ -8,12 +8,34 @@ export default function questions(state = {}, action){
                 ...action.questions,
             }
         case ANSWER_QUESTION: 
-            //todo add ANSWER_QUESTION reducer
-            return
+            if(action.answer === "optionOne")
+                return {
+                    ...state,
+                    [action.question.id]: {
+                        ...action.question,
+                        "optionOne": {
+                            votes: action.question.optionOne.votes.concat([action.authedUser]),
+                            text: action.question.optionOne.text,
+                        }
+                    }
+                }
+            else
+                return {
+                    ...state,
+                    [action.question.id]: {
+                        ...action.question,
+                        "optionTwo": {
+                            votes: action.question.optionTwo.votes.concat([action.authedUser]),
+                            text: action.question.optionTwo.text,
+                        }
+                    }
+                }
             
         case ADD_QUESTION: 
-            //todo add ADD_QUESTION reducer
-            return
+            return {
+                ...state,
+                [action.question.id]: action.question,
+            }
 
         default:
             return state

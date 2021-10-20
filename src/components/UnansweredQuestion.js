@@ -4,6 +4,7 @@ import Card from 'react-bootstrap/Card'
 import Container from 'react-bootstrap/Container'
 import Form from 'react-bootstrap/Form'
 import Button from 'react-bootstrap/Button'
+import  { handleAnswerQuestion } from '../actions/shared'
 
 class AnsweredQuestion extends Component{
     state = {
@@ -16,9 +17,22 @@ class AnsweredQuestion extends Component{
         }))
     }
 
+    handleAnswer = (e) => {
+        e.preventDefault()
+        
+        const { dispatch, question } = this.props
+        dispatch(handleAnswerQuestion({
+            question,
+            answer: this.state.answer,
+        }))
+        this.setState(()=>({
+            answer: ""
+        }))
+    }
+
 
     render() {
-        const { authedUser, author, users, question, id } = this.props
+        const { author, question } = this.props
 
         return (
             <Container>
@@ -38,9 +52,9 @@ class AnsweredQuestion extends Component{
                             label={question.optionTwo.text}
                             name="group2"
                             id="optionTwo"
-                            onChange={()=>this.onChange("optionOne")}
+                            onChange={()=>this.onChange("optionTwo")}
                         /> 
-                        <Button variant="outline-primary" disabled={this.state.answer===''}>Submit</Button>
+                        <Button variant="outline-primary" onClick={(e)=>this.handleAnswer(e)} disabled={this.state.answer===''}>Submit</Button>
                     </Card.Body>
                 </Card>
             </Container>
@@ -54,8 +68,7 @@ function mapStateToProps({ authedUser, users, questions }, { id }){
 
     return {
         authedUser,
-        author,
-        users,
+        author, 
         question: question 
     }
 }
