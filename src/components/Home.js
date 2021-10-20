@@ -3,7 +3,9 @@ import Question from './Question'
 import Tabs from 'react-bootstrap/Tabs'
 import Tab from 'react-bootstrap/Tab'
 import Container from 'react-bootstrap/Container'
-  
+import { connect } from 'react-redux'
+import AnsweredQuestion from "./AnsweredQuestion";
+import UnansweredQuestion from "./UnansweredQuestion";
 
 class Home extends Component{
     state = {
@@ -15,12 +17,15 @@ class Home extends Component{
             isAnswered: event === "answered"? true : false
         }))
     }
-
     render() {
-      
+        const { answeredQuestionsIds, unansweredQuestionsIds } = this.props
+        console.log(answeredQuestionsIds, unansweredQuestionsIds )
+
+        
+
         return (
             <Container>
-                <Tabs defaultActiveKey="answered" id="answered-or-unanswered" className="mb-3">
+                <Tabs defaultActiveKey="answered" id="answered-or-unanswered" className="mb-3" onSelect={(e)=>this.onToggle(e)}>
                     <Tab eventKey="answered" title="Answered Questions">
                     </Tab>
                     <Tab eventKey="unanswered" title="Unanswered Questions">
@@ -28,13 +33,47 @@ class Home extends Component{
                 </Tabs>
 
                     {this.state.isAnswered
-                    ? (<div><Question id = '8xf0y6ziyjabvozdd253nd'/><Question id = '8xf0y6ziyjabvozdd253nd'/></div>)
-                    :
-                    (<Question id = '8xf0y6ziyjabvozdd253nd'/>)
+                    ? (
+                        <ul className="dashboard-list">
+                            {answeredQuestionsIds.map((id)=>(
+                                <li key={id}>
+                                    <Question id = {id}/>
+                                </li>
+                            ))}
+                        </ul>
+                      )
+                    : (
+                        <ul className="dashboard-list">
+                            {unansweredQuestionsIds.map((id)=>(
+                                <li key={id}>
+                                    <Question id = {id}/>
+                                </li>
+                            ))}
+                        </ul>
+                      )
                     } 
             </Container>
         )
     }
 }
 
-export default Home 
+function mapStateToProps({ authedUser, users, questions }){
+    const user = users[authedUser]
+    const answeredQuestionsIds = []
+    const unansweredQuestionsIds = []
+
+    Object.keys(questions).forEach(questionId => {
+    
+        if(Object.keys(user.answers).includes(questionId))
+            answeredQuestionsIds.push(questionId)
+        else
+            unansweredQuestionsIds.push(questionId)
+    });
+
+    return {
+        answeredQuestionsIds,
+        unansweredQuestionsIds,
+    }
+}
+
+export default connect(mapStateToProps)(Home)
