@@ -5,7 +5,7 @@ export default function questions(state = {}, action){
         case RECIEVE_QUESTIONS: 
             return {
                 ...state,
-                ...action.questions
+                ...action.questions,
             }
         case ANSWER_QUESTION: 
             //todo add ANSWER_QUESTION reducer

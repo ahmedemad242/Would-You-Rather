@@ -9,9 +9,9 @@ const AUTHED_ID = 'tylermcginnis'
 export function handleInitialData () {
     return (dispatch) => {
         dispatch(showLoading())
-        return getInitialData().then(({ users, tweets }) => {
+        return getInitialData().then(({ users, questions }) => {
             dispatch(recieveUsers(users))
-            dispatch(recieveQuestions(tweets))
+            dispatch(recieveQuestions(questions))
             dispatch(setAuthedUser(AUTHED_ID))
             dispatch(hideLoading())
         })
