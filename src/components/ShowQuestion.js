@@ -5,10 +5,10 @@ import UnansweredQuestion from "./UnansweredQuestion";
 
 class Question extends Component{
     render() {
-        const { authedUser, author, users, question, id } = this.props 
+        const { authedUser, users, id } = this.props 
 
         const isAnswered = Object.keys(users[authedUser].answers).filter((qid)=> qid === id).length>0?true:false
-
+        
         if(isAnswered){
             return (<AnsweredQuestion id = {id}/>) 
         }

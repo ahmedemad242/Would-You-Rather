@@ -3,11 +3,14 @@ import { connect } from 'react-redux'
 import Card from 'react-bootstrap/Card';
 import Button from 'react-bootstrap/Button';
 import Container from 'react-bootstrap/Container'
+import { Link } from 'react-router-dom'
 
 class Question extends Component{
     render() {
-        const { authedUser, author, question, id } = this.props 
+        
+        const { author, question, id } = this.props 
         return (
+            <Link to={`/question/${id}`}>
             <Container>
                 <Card>
                     <Card.Header>{ author.name }</Card.Header>
@@ -16,10 +19,13 @@ class Question extends Component{
                         <Card.Text>
                         {`...${question.optionOne.text}...`}
                         </Card.Text>
-                        <Button variant="outline-primary">View Poll</Button>
+                       
+                            <Button variant="outline-primary">View Poll</Button>
+                        
                     </Card.Body>
                 </Card>
             </Container>
+            </Link>
         )
     }
 }

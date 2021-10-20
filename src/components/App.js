@@ -1,4 +1,4 @@
-import React, { Component } from 'react'
+import React, { Component, Fragment } from 'react'
 import Home from  './Home'
 import { handleInitialData } from '../actions/shared'
 import { connect } from 'react-redux' 
@@ -6,8 +6,9 @@ import NewQuestion from './NewQuestion'
 import Container from 'react-bootstrap/Container'
 import ShowQuestion from  './ShowQuestion'
 import LeaderBoard from './LeaderBoard'
-import AnsweredQuestion from "./AnsweredQuestion";
-import UnansweredQuestion from "./UnansweredQuestion";
+import { BrowserRouter as Router, Route } from 'react-router-dom'
+import LoadingBar from 'react-redux-loading'
+import Nav from './Nav'
 
 class App extends Component {
   componentDidMount() {
@@ -16,13 +17,22 @@ class App extends Component {
 
   render() {
     return (
-      <div className="container">
+      <Router>
+      <Fragment>  
+      <LoadingBar/>
+      <Container className='container'>
+        <Nav/>
         {this.props.loading?null
         :<Container style={{width: "50%",}}>
-            <UnansweredQuestion id = "8xf0y6ziyjabvozdd253nd"/>
+          <Route path='/' exact component={Home}/>
+          <Route path='/leaderboard' exact component={LeaderBoard}/>
+          <Route path='/question/:id' exact component={ShowQuestion}/>
+          <Route path='/new' exact component={NewQuestion}/>
           </Container>
         }
-      </div>
+      </Container>
+      </Fragment>  
+      </Router>
     ) 
   }
 }
