@@ -16,6 +16,15 @@ class AnsweredQuestion extends Component{
             <Container>
                 <Card>
                     <Card.Header>Asked by { author.name }</Card.Header>
+                    <img 
+                    src={ author.avatarURL } 
+                    alt={`avatar of ${ author.name }`} 
+                    width="150" 
+                    height="150"
+                    style={{
+                        borderRadius: "50%"
+                    }}
+                    />
                     <Card.Body>
                         <Card.Title>Results:</Card.Title>
                         <Container>

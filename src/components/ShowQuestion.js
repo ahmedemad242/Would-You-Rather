@@ -5,11 +5,12 @@ import UnansweredQuestion from "./UnansweredQuestion";
 
 class Question extends Component{
     render() {
+        if(this.props.question===null)
+            return <h1>404 NOT FOUND!</h1>
+            
         const { authedUser, users, id } = this.props 
 
         const isAnswered = Object.keys(users[authedUser].answers).filter((qid)=> qid === id).length>0?true:false
-        console.log(id)
-        console.log(Object.keys(users[authedUser].answers).filter((qid)=> qid === id))
 
         if(isAnswered){
             return (<AnsweredQuestion id = {id}/>) 
@@ -23,7 +24,7 @@ class Question extends Component{
 function mapStateToProps({ authedUser, users, questions }, props){
     const { id } = props.match.params
     const question = questions[id]
-    const author = users[question.author]
+    const author = question ? users[question.author]: null
 
     return {
         authedUser,

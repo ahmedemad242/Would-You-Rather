@@ -7,7 +7,7 @@ import { connect } from 'react-redux'
 
 class Home extends Component{
     state = {
-        isAnswered: true,
+        isAnswered: false,
     }
 
     onToggle(event){
@@ -20,7 +20,7 @@ class Home extends Component{
 
         return (
             <Container>
-                <Tabs defaultActiveKey="answered" id="answered-or-unanswered" className="mb-3" onSelect={(e)=>this.onToggle(e)}>
+                <Tabs defaultActiveKey="unanswered" id="answered-or-unanswered" className="mb-3" onSelect={(e)=>this.onToggle(e)}>
                     <Tab eventKey="answered" title="Answered Questions">
                     </Tab>
                     <Tab eventKey="unanswered" title="Unanswered Questions">

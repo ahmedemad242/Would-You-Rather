@@ -14,6 +14,15 @@ class User extends Component{
             <Container>
                 <Card>
                     <Card.Header>{ user.name }</Card.Header>
+                    <img 
+                    src={ user.avatarURL } 
+                    alt={`avatar of ${ user.name }`} 
+                    width="150" 
+                    height="150"
+                    style={{
+                        borderRadius: "50%"
+                    }}
+                    />
                     <Card.Body>
                         <Card.Title>{`Answered Questions ${answeredQuestionsCount}`}</Card.Title>
                         <Card.Title>{`Created Questions ${createdQuestionsCount}`}</Card.Title>
