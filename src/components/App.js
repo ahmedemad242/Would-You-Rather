@@ -6,28 +6,36 @@ import NewQuestion from './NewQuestion'
 import Container from 'react-bootstrap/Container'
 import ShowQuestion from  './ShowQuestion'
 import LeaderBoard from './LeaderBoard'
-import { BrowserRouter as Router, Route } from 'react-router-dom'
+import { BrowserRouter as Router, Route, Redirect, Switch } from 'react-router-dom'
 import LoadingBar from 'react-redux-loading'
 import Nav from './Nav'
+import Login from './Login'
+import PrivateRoute from './PrivatRoute'
 
 class App extends Component {
   componentDidMount() {
     this.props.dispatch(handleInitialData())
-  }
-
-  render() {
+  }  
+  render() {  
     return (
       <Router>
       <Fragment>  
       <LoadingBar/>
       <Container className='container'>
         <Nav/>
-        {this.props.loading?null
-        :<Container style={{width: "50%",}}>
-          <Route path='/' exact component={Home}/>
-          <Route path='/leaderboard' exact component={LeaderBoard}/>
-          <Route path='/question/:id' exact component={ShowQuestion}/>
-          <Route path='/new' exact component={NewQuestion}/>
+        
+        {
+        this.props.loading
+        ? null
+        : <Container style={{width: "50%",}}>
+            <Switch>
+              <PrivateRoute path='/' exact component={Home}/>
+              <PrivateRoute path='/leaderboard' exact component={LeaderBoard}/>
+              <PrivateRoute path='/question/:id' exact component={ShowQuestion}/>
+              <PrivateRoute path='/new' exact component={NewQuestion}/>
+              <Route path='/login' exact component={Login}/>
+              <Redirect from="*" to="/" />
+            </Switch>
           </Container>
         }
       </Container>
@@ -37,10 +45,14 @@ class App extends Component {
   }
 }
 
-function mapStateToProps({ authedUser }){
+function mapStateToProps({ authedUser, questions }){
   return {
-    loading: authedUser == null
+    loading: questions === {},
+    authedUser
   }
 }
+
+
+
 
 export default connect(mapStateToProps)(App)

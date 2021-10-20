@@ -58,7 +58,6 @@ function mapStateToProps({ authedUser, users, questions }){
     const unansweredQuestionsIds = []
 
     Object.keys(questions).forEach(questionId => {
-    
         if(Object.keys(user.answers).includes(questionId))
             answeredQuestionsIds.push(questionId)
         else
