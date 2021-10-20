@@ -4,6 +4,7 @@ import { handleInitialData } from '../actions/shared'
 import { connect } from 'react-redux' 
 import NewQuestion from './NewQuestion'
 import Container from 'react-bootstrap/Container'
+import ShowQuestion from  './ShowQuestion'
 
 class App extends Component {
   componentDidMount() {
@@ -15,7 +16,7 @@ class App extends Component {
       <div className="container">
         {this.props.loading?null
         :<Container style={{width: "50%",}}>
-            <NewQuestion id = '8xf0y6ziyjabvozdd253nd'/>
+            <ShowQuestion id = '8xf0y6ziyjabvozdd253nd'/>
           </Container>
         }
       </div>
