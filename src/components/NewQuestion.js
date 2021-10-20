@@ -5,6 +5,7 @@ import Button from 'react-bootstrap/Button'
 import Container from 'react-bootstrap/Container'
 import Form from 'react-bootstrap/Form'
 import { handleAddQuestion } from '../actions/shared'
+import { Redirect } from 'react-router-dom'
 
 
 
@@ -12,6 +13,7 @@ class NewQuestion extends Component{
     state={
         firstQuestion:'',
         secondQuestion: '',
+        toHome: false,
     }
 
     onChangeText(firstQuestion, secondQuestion){
@@ -25,12 +27,14 @@ class NewQuestion extends Component{
         e.preventDefault()
         this.props.dispatch(handleAddQuestion(this.state.firstQuestion,this.state.secondQuestion))
         this.setState(()=>({
-            firstQuestion:'',
-            secondQuestion: '',
+            toHome: true
         }))
+        
     }
 
     render() {
+        if(this.state.toHome)
+            return (<Redirect to='/'/>)
         return (
             <Container>
                 <Card>
@@ -57,12 +61,12 @@ class NewQuestion extends Component{
                                 placeholder="Enter Second  Question"
                                 onChange={(e)=>this.onChangeText(null,e.target.value)} />
                             </Form.Group>
-                            <Button 
-                            variant="outline-primary" 
-                            type="submit"
-                            disabled={this.state.firstQuestion===''|| this.state.secondQuestion===''}
-                            onClick={(e)=>this.handleSubmit(e)}
-                            >Submit</Button>
+                                <Button 
+                                variant="outline-primary" 
+                                type="submit"
+                                disabled={this.state.firstQuestion===''|| this.state.secondQuestion===''}
+                                onClick={(e)=>this.handleSubmit(e)}
+                                >Submit</Button>
                         </Form>
 
                         

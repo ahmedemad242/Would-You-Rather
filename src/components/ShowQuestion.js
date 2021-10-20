@@ -8,7 +8,9 @@ class Question extends Component{
         const { authedUser, users, id } = this.props 
 
         const isAnswered = Object.keys(users[authedUser].answers).filter((qid)=> qid === id).length>0?true:false
-        
+        console.log(id)
+        console.log(Object.keys(users[authedUser].answers).filter((qid)=> qid === id))
+
         if(isAnswered){
             return (<AnsweredQuestion id = {id}/>) 
         }
@@ -18,14 +20,16 @@ class Question extends Component{
     }
 }
 
-function mapStateToProps({ authedUser, users, questions }, { id }){
+function mapStateToProps({ authedUser, users, questions }, props){
+    const { id } = props.match.params
     const question = questions[id]
-    const author = question ? users[question.author] : null
+    const author = users[question.author]
 
     return {
         authedUser,
         author,
         users,
+        id,
         question: question 
     }
 }

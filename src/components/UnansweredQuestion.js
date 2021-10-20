@@ -25,9 +25,6 @@ class AnsweredQuestion extends Component{
             question,
             answer: this.state.answer,
         }))
-        this.setState(()=>({
-            answer: ""
-        }))
     }
 
 
@@ -54,7 +51,7 @@ class AnsweredQuestion extends Component{
                             id="optionTwo"
                             onChange={()=>this.onChange("optionTwo")}
                         /> 
-                        <Button variant="outline-primary" onClick={(e)=>this.handleAnswer(e)} disabled={this.state.answer===''}>Submit</Button>
+                        <Button variant="outline-primary" onClick={(e)=>this.handleAnswer(e)} disabled={this.state.answer===''}>Submit</Button>                        
                     </Card.Body>
                 </Card>
             </Container>
@@ -64,7 +61,7 @@ class AnsweredQuestion extends Component{
 
 function mapStateToProps({ authedUser, users, questions }, { id }){
     const question = questions[id]
-    const author = question ? users[question.author] : null
+    const author = users[question.author]
 
     return {
         authedUser,

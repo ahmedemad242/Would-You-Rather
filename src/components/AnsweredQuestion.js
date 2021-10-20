@@ -6,7 +6,7 @@ import Container from 'react-bootstrap/Container'
 class AnsweredQuestion extends Component{
     render() {
         const { authedUser, author, users, question, id } = this.props
-
+        
         const answer = users[authedUser].answers[id]
         const optionOneVotes = question.optionOne.votes.length
         const optionTwoVotes = question.optionTwo.votes.length
@@ -33,7 +33,7 @@ class AnsweredQuestion extends Component{
                         </Container>
 
                         <Container>
-                            <Card bg={optionOneVotes>optionTwoVotes?"success":optionOneVotes===optionTwoVotes?"secondary":null}>
+                            <Card bg={optionTwoVotes>optionOneVotes?"success":optionOneVotes===optionTwoVotes?"secondary":null}>
                                 <Card.Body>
                                     <Card.Title>{question.optionTwo.text}</Card.Title>
                                     <Card.Text>
@@ -48,13 +48,13 @@ class AnsweredQuestion extends Component{
                     </Card.Body>
                 </Card>
             </Container>
-        )  
+        )   
     }    
 }
 
 function mapStateToProps({ authedUser, users, questions }, { id }){
     const question = questions[id]
-    const author = question ? users[question.author] : null
+    const author = users[question.author]
 
     return {
         authedUser,

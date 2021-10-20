@@ -16,10 +16,7 @@ class Home extends Component{
         }))
     }
     render() {
-        const { answeredQuestionsIds, unansweredQuestionsIds } = this.props
-        console.log(answeredQuestionsIds, unansweredQuestionsIds )
-
-        
+        const { answeredQuestionsIds, unansweredQuestionsIds } = this.props      
 
         return (
             <Container>
