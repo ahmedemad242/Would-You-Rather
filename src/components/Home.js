@@ -4,8 +4,6 @@ import Tabs from 'react-bootstrap/Tabs'
 import Tab from 'react-bootstrap/Tab'
 import Container from 'react-bootstrap/Container'
 import { connect } from 'react-redux'
-import AnsweredQuestion from "./AnsweredQuestion";
-import UnansweredQuestion from "./UnansweredQuestion";
 
 class Home extends Component{
     state = {
