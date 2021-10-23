@@ -12,8 +12,6 @@ class Question extends Component{
             return <Login redirectTo = {`/question/${id}`}/>
 
 
-        console.log(this.props.question)
-
         if(!this.props.question)
             return <h1>404 NOT FOUND!</h1>
             
