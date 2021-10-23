@@ -2,13 +2,22 @@ import React, { Component } from "react";
 import { connect } from 'react-redux'
 import AnsweredQuestion from "./AnsweredQuestion";
 import UnansweredQuestion from "./UnansweredQuestion";
+import Login from './Login'
 
 class Question extends Component{
     render() {
-        if(this.props.question===null)
+        const { authedUser, users, id } = this.props
+
+        if(authedUser === null)
+            return <Login redirectTo = {`/question/${id}`}/>
+
+
+        console.log(this.props.question)
+
+        if(!this.props.question)
             return <h1>404 NOT FOUND!</h1>
             
-        const { authedUser, users, id } = this.props 
+         
 
         const isAnswered = Object.keys(users[authedUser].answers).filter((qid)=> qid === id).length>0?true:false
 

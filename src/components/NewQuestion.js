@@ -6,6 +6,8 @@ import Container from 'react-bootstrap/Container'
 import Form from 'react-bootstrap/Form'
 import { handleAddQuestion } from '../actions/shared'
 import { Redirect } from 'react-router-dom'
+import Login from './Login'
+
 
 
 
@@ -33,8 +35,12 @@ class NewQuestion extends Component{
     }
 
     render() {
+        if(this.props.authedUser === null)
+            return <Login redirectTo = '/add'/>
+
         if(this.state.toHome)
             return (<Redirect to='/'/>)
+
         return (
             <Container>
                 <Card>
@@ -77,5 +83,10 @@ class NewQuestion extends Component{
     }
 }
 
+function mapStateToProps({  authedUser }){
+    return {
+        authedUser,
+    }
+}
 
-export default connect()(NewQuestion)
+export default connect(mapStateToProps)(NewQuestion)

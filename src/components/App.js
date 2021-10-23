@@ -10,15 +10,16 @@ import { BrowserRouter as Router, Route, Redirect, Switch } from 'react-router-d
 import LoadingBar from 'react-redux-loading'
 import Nav from './Nav'
 import Login from './Login'
-import PrivateRoute from './PrivatRoute'
+
 
 class App extends Component {
   componentDidMount() {
     this.props.dispatch(handleInitialData())
   }  
-  render() {  
+  render() {   
     return (
       <Router>
+     
       <Fragment>  
       <LoadingBar/>
       <Container className='container'>
@@ -29,10 +30,10 @@ class App extends Component {
         ? null
         : <Container style={{width: "50%",}}>
             <Switch>
-              <PrivateRoute path='/' exact component={Home}/>
-              <PrivateRoute path='/leaderboard' exact component={LeaderBoard}/>
-              <PrivateRoute path='/question/:id' exact component={ShowQuestion}/>
-              <PrivateRoute path='/add' exact component={NewQuestion}/>
+              <Route path='/question/:id' exact component={ShowQuestion}/>
+              <Route path='/' exact component={Home}/>
+              <Route path='/leaderboard' exact component={LeaderBoard}/>
+              <Route path='/add' exact component={NewQuestion}/>
               <Route path='/login' exact component={Login}/>
               <Redirect from="*" to="/" />
             </Switch>

@@ -9,7 +9,7 @@ import { Redirect } from 'react-router-dom'
 class Login extends Component{
     state = {
         authedUser: this.props.authedUser,
-        toHome: false
+        signedIn: false
     }
 
     onSelect(authedUser) {
@@ -22,13 +22,13 @@ class Login extends Component{
         e.preventDefault()
         this.props.dispatch(setAuthedUser(this.state.authedUser))
         this.setState(()=>({
-            toHome: true
+            signedIn: true
         }))
     }
 
     render(){
-        if(this.state.toHome)
-            return (<Redirect to='/'/>)
+        if(this.state.signedIn)
+            return (<Redirect to={ this.props.redirectTo?this.props.redirectTo:'/' }/>)
 
         const { users } = this.props
         return (

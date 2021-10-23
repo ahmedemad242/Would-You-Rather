@@ -4,6 +4,7 @@ import Tabs from 'react-bootstrap/Tabs'
 import Tab from 'react-bootstrap/Tab'
 import Container from 'react-bootstrap/Container'
 import { connect } from 'react-redux'
+import Login from './Login'
 
 class Home extends Component{
     state = {
@@ -16,6 +17,9 @@ class Home extends Component{
         }))
     }
     render() {
+        if(this.props.authedUser === null)
+            return <Login redirectTo = '/'/>
+
         const { answeredQuestionsIds, unansweredQuestionsIds } = this.props      
 
         return (
@@ -53,7 +57,13 @@ class Home extends Component{
 }
 
 function mapStateToProps({ authedUser, users, questions }){
+    if(authedUser === null )
+        return {
+            authedUser
+        }
+        
     const user = users[authedUser]
+    
     const answeredQuestionsIds = []
     const unansweredQuestionsIds = []
 
@@ -63,8 +73,11 @@ function mapStateToProps({ authedUser, users, questions }){
         else
             unansweredQuestionsIds.push(questionId)
     });
+    answeredQuestionsIds.sort((a,b) => questions[b].timestamp - questions[a].timestamp)
+    unansweredQuestionsIds.sort((a,b) => questions[b].timestamp - questions[a].timestamp)
 
     return {
+        authedUser,
         answeredQuestionsIds,
         unansweredQuestionsIds,
     }
