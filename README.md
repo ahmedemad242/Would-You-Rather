@@ -14,3 +14,6 @@ This application allow you to play would you rather between you and your friends
 
 
 
+
+
+
